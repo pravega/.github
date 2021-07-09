@@ -60,7 +60,7 @@ A valid, binding veto cannot be overruled. If a veto is cast, it must be accompa
 
 ### Actions
 
-The following table lists the actions that require voting and the necessary condition for the vote to pass. Note that anyone can vote on public votes, which in fact helps to gain more confidence on the direction of the vote
+The following table lists the actions that require voting and the necessary condition for the vote to pass. Note that anyone can vote on public votes, which in fact helps to gain more confidence on the direction of the vote.
 
 Action | Approval | Binding | Visibility | Min. time (days)
 -------|--------|---------|--------|-----------
