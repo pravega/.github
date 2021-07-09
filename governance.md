@@ -2,7 +2,7 @@
 Pravega is a code-repository organization hosted by CNCF comprising repositories supporting and forming an ecosystem for streaming data. All repositories under the Pravega organization are driven by the bylaws described in this document. This document covers the structure of the various groups that form Pravega and the processes used across the organization ranging from code contributions to voting and changes to governance.
 
 ## Mission
-Pravega targets the development of software for streaming data, with a special focus on storage. It is core to our mission to develop and grow a thriving community of software developers. The community drives the technical direction of Pravega via open discussions and votings; by design, very few actions are private. It accepts contributions from any interested party as long as such a contribution is performed according to the project Code of Conduct. The Pravega community aims to be diverse and inclusive.
+Pravega targets the development of software for streaming data, with a special focus on storage. It is core to our mission to develop and grow a thriving community of software developers. The community drives the technical direction of Pravega via open discussions and voting; by design, very few actions are private. It accepts contributions from any interested party, so long as such a contribution is performed according to the project Code of Conduct. The Pravega community aims to be diverse and inclusive.
 
 ## Code of Conduct
 Pravega follows the CNCF Code of Conduct:
@@ -14,7 +14,7 @@ The project comprises two main groups of contributors:
 
 1- **Steering Committee**. The Steering Committee is responsible for general project oversight and for representing the project. They are owners (maintainers) of the `pravega` Github org. The committee responsibilities include interacting with the CNCF board, voting on new committers and members, and interacting with various CNCF bodies. From a CNCF perspective, the Steering Committee members are the maintainers of the project.
 
-2- **Committer Team**. The repositories under the `pravega` Github org are split into four groups, each associate to a team: core, operators, ecosystem, and integration and tools. A committer is a member with write permission in one or more teams. Being a committer for a given team gives the member write permission to all repositories associated to the team. Members of the Steering Committee are committers in all teams.
+2- **Committer Team**. The repositories under the `pravega` Github org are split into four groups, each associated to a team: core, operators, ecosystem, and integration and tools. A committer is a member with write permission in one or more teams. Being a committer for a given team gives the member write permission to all repositories associated to the team. Members of the Steering Committee are committers in all teams.
 
 ## Communication
 The primary way of communicating within the project is email. Contributors are free to discuss offline issues, e.g., using slack, but any resolution needs to be communicated by email. Voting in particular must happen on the appropriate mailing list.
@@ -82,7 +82,7 @@ Code change (Pull Request) | Lazy Approval falling back to Lazy Majority upon v
 Votes unrelated to features and code changes must be conducted by email. Features and code changes can be voted upon directly on GitHub issues and pull requests.
 
 #### Email
-To start a vote, send a message to the appropriate email list and prefix the subject with `[VOTE]`. For example, if contributors are expected to vote on a release candidate, then the subject should be `[VOTE] Release x.y.z Candidate 0`. Votes for new committers and Steering Committee must also be prefixed accordingly.
+To start a vote, send a message to the appropriate email list and prefix the subject with `[VOTE]`. For example, if contributors are expected to vote on a release candidate, then the subject should be `[VOTE] Release x.y.z Candidate 0`. Votes for new committers and Steering Committee members must also be prefixed accordingly.
 
 The initial vote message must contain the deadline for contributors to vote. Once the deadline has passed, the initiator can decide to conclude or extend it as needed. One reason for extending is not having enough votes. See the actions table above for the corresponding time bounds according to the different actions.
 
