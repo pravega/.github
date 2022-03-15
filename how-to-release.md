@@ -1,13 +1,6 @@
 Each release should be executed by a Release Manager, who is selected/proposed by the steering committee. This document describes the process that the Release Manager follows to perform a release. Any changes to this process should be discussed and adopted on the dev@ mailing list.
 
-This release process should be followed by all the Java-based projects with regular releases along with Pravega inside Pravega organization. Currently there are six projects that should follow such process to release.
-
-- [Pravega](https://github.com/pravega/pravega)
-- [Pravega Keycloak Client](https://github.com/pravega/pravega-keycloak)
-- [Pravega Schema Registry](https://github.com/pravega/schema-registry)
-- [Pravega Flink Connector](https://github.com/pravega/flink-connectors)
-- [Pravega Spark Connector](https://github.com/pravega/spark-connectors)
-- [Pravega Samples](https://github.com/pravega/pravega-samples)
+This release process should be strictly followed by Pravega and also followed by all the ecosystem projects inside Pravega organization by default, but Pravega ecosystem projects can have its own release instruction page that points to this one as a reference and then explains what is different.
 
 If you are releasing the project, then you must read and follow the instructions carefully. The releases are a public face of the project and most users interact with the project only through the releases, so they need to be treated with great importance.
 
@@ -25,19 +18,22 @@ The release process consists of several steps:
 6. Finalize the release
 7. Promote the release
 
-For Pravega releases, all these steps should be done.
-
-For the other ecosystem projects, as most of the validation is already done in the Pravega release voting phase, step 4 and 5 can be skipped to reduce the complexity and accelerate the whole pipeline.
-
-As the current projects have dependencies within these projects, the formal release should happen
-in the following order.
+As the current projects have dependencies within these projects, the formal release should happen in the following order.
 
 > Pravega -> Pravega Keycloak Client / Pravega Spark Connector -> Pravega Schema Registry -> Pravega Flink Connector -> Pravega Samples
 
 # Decide to release
 Deciding to release is the first step of the release process. This is a consensus-based decision of the entire community, There is no formal process to decide to release, but any objections needs to be resolved by consensus before starting the release.
 
-Selecting a Release Manager is the next step. All the project committers can volunteer to be the release manager, and the steering committee can select or propose one as the release manager. Release managers should take responsibility to track the release progress and perform the actions during the whole release phase.
+## Select a release manager
+
+All the project committers can volunteer to be the release manager, and the steering committee can select or propose one as the release manager.
+
+If there are multiple volunteers, the steering committee should discuss and select a release manager, preferrably on a first-come-first-serve basis. All the other volunteers will be backup candidates if the designated one is unavailable or unable to perform their duties.
+
+If there is no volunteer or backup, the steering committee will need to discuss and choose one from the previous release managers as the release manager.
+
+Release managers should take responsibility to track the release progress and perform the actions during the whole release phase, and is responsible for all releases associated with a major release(i.e., 0.7.x, which included 0.7.0 through 0.7.3). 
 
 # Prepare for the release
 
@@ -68,10 +64,10 @@ For setting up docker see: https://docs.docker.com/engine/install/ubuntu/
 For configuring to run as a non-root user see: https://docs.docker.com/engine/install/linux-postinstall/, https://docs.docker.com/engine/security/rootless/
 
 ## Announcing the release process starts
-When starting the release process, Pravega release managers should create a new release specific channel on pravega.io slack with name like pravega-release-090 and keep posting the progress on the release on this channel from time to time. All the ecosystem projects release managers should be invited into this channel for continuous discussion. You can also ask external contributors to validate the release using this channel.
+When starting the release process, Pravega release managers should create a new release specific channel on pravega.io slack with name like pravega-release-090 and keep posting the progress on the release on this channel from time to time. All the ecosystem projects release managers should be invited into this channel for continuous discussion. All contributors can join this channel and validate the release in it.
 
 ## Preparing the release notes
-Please gather the information of the highlight features and important fixes in the release from all the component owners and prepare the release notes. You can also refer to previous releases for an example of how to put together notes.
+Please gather the information of the highlight features and important fixes in the release from all committers and new feature contributors, and prepare the release notes. You can also refer to previous releases for an example of how to put together notes.
 
 ## Preparing the branch
 
@@ -154,7 +150,6 @@ git branch -D release-0.3.0-rc0
 * Once the operation completes, locate the URL field in the Summary tab of the newly closed repository (it will be something like https://oss.sonatype.org/content/repositories/iopravega-XXXX where XXXX is the number of the staging repository). This should be tested to ensure that all artifacts are present and functions as expected.
 
 # Vote on the release candidate
-Note again that this vote phase is not strictly required for ecosystem projects. 
 
 ## Announcing for voting
 Once you have built and individually reviewed the release candidate, please share it for the community-wide review. You need to share these things to the Slack channel for this release candidate.
@@ -255,7 +250,7 @@ Choose the latest release candidate in sonatype and click on the "Release" butto
 
 Generate the documentation and update onto the website.
 
-## Step 5: Push the images to Docker Hub (Only required for Pravega)
+## Step 5: Push the images to Docker Hub
 For this step, you need a Docker Hub account associated to Pravega.
 
 Once you are ready, run the following steps:
@@ -268,11 +263,11 @@ Note: You might need to use `sudo` to run the last two commands.
 
 # Promote the release
 
-After the release is done, please share the release announcement in both `#general` and the release channel.
+After the release is done, please share the release announcement in both `#general` and the release Slack channel.
 
 ## Cleanups
 
-Please double check and drop if there are no staging repositories for this release on sonatype.
+Please double check that there are no staging repositories for this release on sonatype, and drop if there is some left.
 
 Once the release is done, create an issue and corresponding pull request to change the `pravegaVersion` in `gradle.properties` to `X.Y.(Z+1)-SNAPSHOT` for the release branch `rX.Y`.
 
