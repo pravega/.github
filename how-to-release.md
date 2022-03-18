@@ -6,7 +6,7 @@ If you are releasing the project, then you must read and follow the instructions
 
 # Overview
 
-![release process](https://cwiki.apache.org/confluence/download/attachments/73631092/release-guide-1.png)
+![release process](images/release-guide.png)
 
 The release process consists of several steps:
 
@@ -23,17 +23,17 @@ As the current projects have dependencies within these projects, the formal rele
 > Pravega -> Pravega Keycloak Client / Pravega Spark Connector -> Pravega Schema Registry -> Pravega Flink Connector -> Pravega Samples
 
 # Decide to release
-Deciding to release is the first step of the release process. This is a consensus-based decision of the entire community, There is no formal process to decide to release, but any objections needs to be resolved by consensus before starting the release.
+Deciding to release is the first step of the release process. The steering committee is responsible for announcing the release decision on Slack `#dev` channel. This is a consensus-based decision of the entire community, There is no formal process to decide to release, but any objections needs to be resolved by consensus before starting the release.
 
 ## Select a release manager
 
-All the project committers can volunteer to be the release manager, and the steering committee can select or propose one as the release manager.
+All the project committers can volunteer to be the release manager by replying to the release decision message in Slack, and the steering committee can select or propose one as the release manager.
 
 If there are multiple volunteers, the steering committee should discuss and select a release manager, preferrably on a first-come-first-serve basis. All the other volunteers will be backup candidates if the designated one is unavailable or unable to perform their duties.
 
 If there is no volunteer or backup, the steering committee will need to discuss and choose one from the previous release managers as the release manager.
 
-Release managers should take responsibility to track the release progress and perform the actions during the whole release phase, and is responsible for all releases associated with a major release(i.e., 0.7.x, which included 0.7.0 through 0.7.3). 
+Release managers should take responsibility to track the release progress and perform the actions during the whole release phase, and is responsible for all releases associated with a major release(i.e., 0.7.x, which included 0.7.0 through 0.7.3).
 
 # Prepare for the release
 
@@ -67,7 +67,7 @@ For configuring to run as a non-root user see: https://docs.docker.com/engine/in
 When starting the release process, Pravega release managers should create a new release specific channel on pravega.io slack with name like pravega-release-090 and keep posting the progress on the release on this channel from time to time. All the ecosystem projects release managers should be invited into this channel for continuous discussion. All contributors can join this channel and validate the release in it.
 
 ## Preparing the release notes
-Please gather the information of the highlight features and important fixes in the release from all committers and new feature contributors, and prepare the release notes. You can also refer to previous releases for an example of how to put together notes.
+Please gather the information of the highlight features and important fixes in the release from all committers and new feature contributors, then prepare the release notes. You can also refer to previous releases for an example of how to put together notes.
 
 ## Preparing the branch
 
@@ -137,7 +137,8 @@ git branch -D release-0.3.0-rc0
 ```
 
 ## Staging the binary releases
-* Build with the following command, there could be some slight differences regarding the parameters and plugin used for publishing.
+
+Build the binaries with the following command, there could be some slight differences regarding the parameters and plugin used for publishing.
 ```
 ./gradlew clean assemble publish -PdoSigning=true -Psigning.password=<signing-password> -PpublishUrl=mavenCentral -PpublishUsername=<sonatype-username> -PpublishPassword=<sonatype-password>
 ```
@@ -148,6 +149,13 @@ git branch -D release-0.3.0-rc0
   * Locate the staging repository that was created for the latest publish (format iopravega-XXXX, for example iopravega-1004)
 * Select the repository and click the "Close" button in the top menu bar. This will perform validations to ensure that the contents meets the maven requirements (contains signatures, javadocs, sources, etc). This operation takes a short time to complete, press the Refresh button in the top menu bar occasionally until the operation completes.
 * Once the operation completes, locate the URL field in the Summary tab of the newly closed repository (it will be something like https://oss.sonatype.org/content/repositories/iopravega-XXXX where XXXX is the number of the staging repository). This should be tested to ensure that all artifacts are present and functions as expected.
+
+## Staging the docker images
+
+The docker images should also be staged to the release manager's personal repository for validation from Docker/Kubernetes users. This can be done with the below command.
+```
+./gradlew clean docker dockerPush -PpravegaBaseTag=<docker-username>/pravega -PbookkeeperBaseTag=<docker-username>/bookkeeper -PpravegaVersion='X.Y.Z-rcN'
+```
 
 # Vote on the release candidate
 
@@ -166,6 +174,7 @@ Please review and vote on the release candidate #0 for the version 0.3.0, as fol
 
 Github link: https://github.com/pravega/pravega/releases/tag/v0.3.0-rc0
 Sonatype link: https://oss.sonatype.org/content/repositories/iopravega-1004
+Docker Images: brianzhou/pravega:0.3.0-rc0
 Release notes: https://gist.github.com/crazyzhou/f53ccfc395ce35f4d09bc2a27dsbcf69
 ```
 
@@ -178,6 +187,7 @@ There are a few things to check including
 - All the unit and integration tests pass
 - Checksums of the artifacts and source code are correct
 - Verify that it can locate, build and run with the staging artifacts. For example, use the [Pravega samples](https://github.com/pravega/pravega-samples) to verify.
+- Docker images can run in a container successfully
 
 It is possible that a release candidate is problematic or denied. In this case, you need to announce the cancellation of this vote, and then fixes issues and repeats the cycle.
 
@@ -255,9 +265,14 @@ For this step, you need a Docker Hub account associated to Pravega.
 
 Once you are ready, run the following steps:
 
-- `docker login` (using a dockerhub account with write access)
-- `./gradlew clean docker dockerPush` (this pushes the specific version tags)
-- `docker push pravega/pravega:latest & docker push pravega/bookkeeper:latest` (this updates the latest tags, if desired)
+```
+// Using a dockerhub account with write access
+docker login
+// This pushes the specific version tags
+./gradlew clean docker dockerPush
+// This updates the latest tags, if desired
+docker push pravega/pravega:latest & docker push pravega/bookkeeper:latest
+```
 
 Note: You might need to use `sudo` to run the last two commands.
 
