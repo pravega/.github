@@ -1,6 +1,14 @@
 Each release should be executed by a Release Manager, who is selected/proposed by the steering committee. This document describes the process that the Release Manager follows to perform a release. Any changes to this process should be discussed and adopted on the dev@ mailing list.
 
-This release process should be strictly followed by Pravega and also followed by all the ecosystem projects inside Pravega organization by default, but Pravega ecosystem projects can have its own release instruction page that points to this one as a reference and then explains what is different.
+This release process should be strictly followed by Pravega and also followed by the following ecosystem projects inside Pravega organization.
+
+- [Pravega Keycloak Client](https://github.com/pravega/pravega-keycloak)
+- [Pravega Schema Registry](https://github.com/pravega/schema-registry)
+- [Pravega Flink Connector](https://github.com/pravega/flink-connectors)
+- [Pravega Spark Connector](https://github.com/pravega/spark-connectors)
+- [Pravega Samples](https://github.com/pravega/pravega-samples)
+
+These projects can have its own release instruction page that points to this one as a reference and then explains what is different.
 
 If you are releasing the project, then you must read and follow the instructions carefully. The releases are a public face of the project and most users interact with the project only through the releases, so they need to be treated with great importance.
 
@@ -23,11 +31,11 @@ As the current projects have dependencies within these projects, the formal rele
 > Pravega -> Pravega Keycloak Client / Pravega Spark Connector -> Pravega Schema Registry -> Pravega Flink Connector -> Pravega Samples
 
 # Decide to release
-Deciding to release is the first step of the release process. The steering committee is responsible for announcing the release decision on Slack `#dev` channel. This is a consensus-based decision of the entire community, There is no formal process to decide to release, but any objections needs to be resolved by consensus before starting the release.
+Deciding to release is the first step of the release process. Any committer can propose to start the release process by proposing to start a new release on the mailing list, giving 72 hours for people to respond and volunteer for release manager. If there are no concerns, then the committer can proceed. If there are concerns or objections, then the Steering Committee can arbitrate and resolve it. Starting the release should be a consensus-based decision of the entire community.
 
 ## Select a release manager
 
-All the project committers can volunteer to be the release manager by replying to the release decision message in Slack, and the steering committee can select or propose one as the release manager.
+All the project committers can volunteer to be the release manager by replying to the release decision mail, and the steering committee can select or propose one as the release manager.
 
 If there are multiple volunteers, the steering committee should discuss and select a release manager, preferrably on a first-come-first-serve basis. All the other volunteers will be backup candidates if the designated one is unavailable or unable to perform their duties.
 
@@ -64,7 +72,7 @@ For setting up docker see: https://docs.docker.com/engine/install/ubuntu/
 For configuring to run as a non-root user see: https://docs.docker.com/engine/install/linux-postinstall/, https://docs.docker.com/engine/security/rootless/
 
 ## Announcing the release process starts
-When starting the release process, Pravega release managers should create a new release specific channel on pravega.io slack with name like pravega-release-090 and keep posting the progress on the release on this channel from time to time. All the ecosystem projects release managers should be invited into this channel for continuous discussion. All contributors can join this channel and validate the release in it.
+When starting the release process, Pravega release managers should create a new release specific channel on `pravega.io` slack with name like `pravega-release-090` and keep posting the progress on the release on this channel from time to time. All the ecosystem projects release managers should be invited into this channel for continuous discussion. All contributors can join this channel and discuss about the release in it, but still keep in mind that the candidate announcing and voting should still happen and only take effect on the dev mailing list.
 
 ## Preparing the release notes
 Please gather the information of the highlight features and important fixes in the release from all committers and new feature contributors, then prepare the release notes. You can also refer to previous releases for an example of how to put together notes.
@@ -160,12 +168,13 @@ The docker images should also be staged to the release manager's personal reposi
 # Vote on the release candidate
 
 ## Announcing for voting
-Once you have built and individually reviewed the release candidate, please share it for the community-wide review. You need to share these things to the Slack channel for this release candidate.
+Once you have built and individually reviewed the release candidate, please share it for the community-wide review. You need to share these things to the dev mailing list for this release candidate and reference the link in the Slack channel.
 - The link of the github release candidate tag
 - The Sonatype staging repository
+- Docker image repository
 - The release notes
 
-Here is the message template.
+Here is the Email template.
 ```
 Hi everyone,
 Please review and vote on the release candidate #0 for the version 0.3.0, as follows:
@@ -174,12 +183,12 @@ Please review and vote on the release candidate #0 for the version 0.3.0, as fol
 
 Github link: https://github.com/pravega/pravega/releases/tag/v0.3.0-rc0
 Sonatype link: https://oss.sonatype.org/content/repositories/iopravega-1004
-Docker Images: brianzhou/pravega:0.3.0-rc0
+Docker Image: brianzhou/pravega:0.3.0-rc0
 Release notes: https://gist.github.com/crazyzhou/f53ccfc395ce35f4d09bc2a27dsbcf69
 ```
 
 ## Voting process
-The community including the release manager will be responsible for verifying the release candidate. Anyone can vote +1 or -1 on the release candidates, which helps to gain more confidence on the release. The vote happens on the release Slack channel. The necessary conditions for the release vote to pass are shown [here](https://github.com/pravega/.github/blob/main/governance.md#actions).
+The community including the release manager will be responsible for verifying the release candidate. Anyone can vote +1 or -1 on the release candidates, which helps to gain more confidence on the release. The vote happens on the dev mailing list. The necessary conditions for the release vote to pass are shown [here](https://github.com/pravega/.github/blob/main/governance.md#actions).
 
 There are a few things to check including
 
@@ -191,7 +200,7 @@ There are a few things to check including
 
 It is possible that a release candidate is problematic or denied. In this case, you need to announce the cancellation of this vote, and then fixes issues and repeats the cycle.
 
-Once the community passes the vote, you need to announce the vote passing in the channel.
+Once the community passes the vote, you need to announce the vote passing in both the mailing list and Slack channel.
 
 # Fix any issues
 Any issues identified during the community review and vote should be fixed in this step.
