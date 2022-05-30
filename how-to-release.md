@@ -31,7 +31,7 @@ As the current projects have dependencies within these projects, the formal rele
 > Pravega -> Pravega Keycloak Client / Pravega Spark Connector -> Pravega Schema Registry -> Pravega Flink Connector -> Pravega Samples
 
 # Decide to release
-Deciding to release is the first step of the release process. Any committer can propose to start the release process by proposing to start a new release on the mailing list, giving 72 hours for people to respond and volunteer for release manager. If there are no concerns, then the committer can proceed. If there are concerns or objections, then the Steering Committee can arbitrate and resolve it. Starting the release should be a consensus-based decision of the entire community.
+Deciding to release is the first step of the release process. Any committer can propose to start the release process by proposing to start a new release on the mailing list, giving 72 hours for people to respond and volunteer for release manager. If there are no concerns, then the committer can proceed. If there are concerns or objections, then the Steering Committee can arbitrate and resolve it.
 
 ## Select a release manager
 
