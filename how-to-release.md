@@ -72,7 +72,7 @@ For setting up docker see: https://docs.docker.com/engine/install/ubuntu/
 For configuring to run as a non-root user see: https://docs.docker.com/engine/install/linux-postinstall/, https://docs.docker.com/engine/security/rootless/
 
 ## Announcing the release process starts
-When starting the release process, Pravega release managers should create a new release specific channel on `pravega.io` slack with name like `pravega-release-090` and keep posting the progress on the release on this channel from time to time. All the ecosystem projects release managers should be invited into this channel for continuous discussion. All contributors can join this channel and discuss about the release in it, but still keep in mind that the candidate announcing and voting should still happen and only take effect on the dev mailing list.
+When starting the release process, a Pravega release manager creates a new release Slack channel on `pravega.io` named after the release version, e.g., `pravega-release-090` for release `0.9.0`. The release manager posts release progress as new steps are executed; reporting progress is critical so that the community knows what is happening. All the ecosystem projects release managers must be invited into this channel for continuous discussion. All contributors can join this channel and discuss about the release in it, but still keep in mind that the candidate announcing and voting should still happen and only take effect on the dev mailing list. To let the community know that cutting a release is in progress, it is important to announce it on the `#dev` Slack channel.
 
 ## Preparing the release notes
 Please gather the information of the highlight features and important fixes in the release from all committers and new feature contributors, then prepare the release notes. You can also refer to previous releases for an example of how to put together notes.
@@ -168,7 +168,7 @@ The docker images should also be staged to the release manager's personal reposi
 # Vote on the release candidate
 
 ## Announcing for voting
-Once you have built and individually reviewed the release candidate, please share it for the community-wide review. You need to share these things to the dev mailing list for this release candidate and reference the link in the Slack channel.
+Once you have built and individually reviewed the release candidate, please share it for community review. The voting must happen in the dev mailing list (`cncf-pravega-dev@cncf.io`) for this release candidate and reference the link in the release Slack channel.
 - The link of the github release candidate tag
 - The Sonatype staging repository
 - Docker image repository
@@ -200,7 +200,7 @@ There are a few things to check including
 
 It is possible that a release candidate is problematic or denied. In this case, you need to announce the cancellation of this vote, and then fixes issues and repeats the cycle.
 
-Once the community passes the vote, you need to announce the vote passing in both the mailing list and Slack channel.
+Once the community passes the vote, you announce the vote result in both the dev mailing list and in the release Slack channel.
 
 # Fix any issues
 Any issues identified during the community review and vote should be fixed in this step.
@@ -287,7 +287,7 @@ Note: You might need to use `sudo` to run the last two commands.
 
 # Promote the release
 
-After the release is done, please share the release announcement in both `#general` and the release Slack channel.
+After the release is done, please share the release announcement in both `#general` and `#dev` slack channels. Posting to the release Slack channel is optional as the release Slack channel can be archived at this point.
 
 ## Cleanups
 
