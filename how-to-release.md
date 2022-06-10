@@ -6,7 +6,6 @@ This release process should be strictly followed by Pravega and also followed by
 - [Pravega Schema Registry](https://github.com/pravega/schema-registry)
 - [Pravega Flink Connector](https://github.com/pravega/flink-connectors)
 - [Pravega Spark Connector](https://github.com/pravega/spark-connectors)
-- [Pravega Samples](https://github.com/pravega/pravega-samples)
 
 These projects can have its own release instruction page that points to this one as a reference and then explains what is different.
 
